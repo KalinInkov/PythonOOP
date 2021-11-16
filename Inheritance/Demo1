@@ -1,0 +1,70 @@
+class Person:
+    def __init__(self, name):
+        if not name:
+            raise ValueError('Person name cannot be None or empty string')
+        self.name = name
+        self.hobbies = []
+
+    def add_hobby(self,hobby):
+        # validate if None
+        # validate name\
+        # validate if hobby already exists
+
+        self.hobbies.append(hobby)
+
+    def __str__(self):
+        return f'{self.name} has hobbies: {self.hobbies}'
+
+
+
+class SoftwareDeveloper(Person):
+    def __init__(self,name):
+        super().__init__(name)
+        self.add_hobby('Lego')
+        self.add_hobby('Cats')
+    def add_hobby(self,hobby):
+        super().add_hobby(hobby)
+
+class MiddlePerson(Person):
+    pass
+
+
+class Teacher(MiddlePerson):
+    def __init__(self,name):
+        super().__init__(name)
+        self.subjects = []
+        # Person.__init__(self,name)
+    def add_subject(self,subject):
+        self.subjects.append(subject)
+        self.add_hobby(subject)
+
+    def __str__(self):
+        hobbies = None
+        if self.hobbies:
+            hobbies = f'{self.name} has hobbies: {self.hobbies}'
+        else:
+            hobbies = f"{self.name} has no hobbies"
+        subjects = None
+        if self.subjects:
+            subjects=f' and subjects: {self.subjects}'
+        else:
+            subjects = " and no subjects"
+        return hobbies+subjects
+
+class Employee(Person):
+    def __init__(self,name,company):
+        super().__init__(name)
+        self.company = company
+
+
+
+mrGeorge = Teacher('mr George')
+pesho = SoftwareDeveloper('Pesho')
+
+mrGeorge.add_hobby("Tennis") #from Person
+mrGeorge.add_subject("Math") # from Teacher
+
+pesho.add_hobby('Biking')
+
+print(pesho)
+print(mrGeorge)
